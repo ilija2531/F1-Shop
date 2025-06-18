@@ -6,6 +6,9 @@ import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
+import AdminPage from "./pages/AdminPage";
+import AdminOrders from "./pages/AdminOrders";
+import MyOrders from "./pages/MyOrders";
 
 
 
@@ -21,8 +24,10 @@ const App = () => {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
-          {/* Add more routes as needed */}
-          {/* Example: <Route path="/products" element={<ProductList />} /> */}
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/orders" element={<AdminOrders />} />
+          <Route path="/my-orders" element={<MyOrders />} />
+          
         </Routes>
       </div>
     </Router>

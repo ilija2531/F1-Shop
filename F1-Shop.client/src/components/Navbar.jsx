@@ -6,15 +6,31 @@ const Navbar = () => {
   const { user, logout } = useAuth();
 
   return (
-    <nav>
-      <Link to="/">Дома</Link> | <Link to="/cart">Кошничка</Link>{" "}
+    <nav style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
+      {user && (
+        <>
+      <Link to="/" style={{ marginRight: "1rem" }}>Дома</Link>
+      <Link to="/cart" style={{ marginRight: "1rem" }}>Кошничка</Link>
+      <Link to="/my-orders" style={{ marginRight: "1rem" }}>Мои нарачки</Link>
+      </>
+     ) }
+
+      {user?.isAdmin && (
+        <>
+          <Link to="/admin" style={{ marginRight: "1rem" }}>Admin</Link>
+          <Link to="/admin/orders" style={{ marginRight: "1rem" }}>Нарачки</Link>
+        </>
+      )}
+
       {user ? (
         <>
-          | Здраво, {user.name}! <button onClick={logout}>Одјави се</button>
+          <span style={{ marginRight: "1rem" }}>Здраво, {user.name}!</span>
+          <button onClick={logout} style={{ cursor: "pointer" }}>Одјави се</button>
         </>
       ) : (
         <>
-          | <Link to="/login">Најава</Link> | <Link to="/register">Регистрација</Link>
+          <Link to="/login" style={{ marginRight: "1rem" }}>Најава</Link>
+          <Link to="/register">Регистрација</Link>
         </>
       )}
     </nav>
