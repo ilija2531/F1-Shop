@@ -23,3 +23,16 @@ export const deleteMyOrder = async (orderId) => {
   });
   return res.data;
 };
+
+export const statusUpdateOrder = async (orderId, status) => {
+  const token = localStorage.getItem("token");
+  const res = await axios.patch(
+    `http://localhost:5000/api/orders/${orderId}/status`,
+    { status },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+  return res.data;
+};
+

@@ -19,6 +19,7 @@ const Navbar = () => {
         <>
           <Link to="/admin" style={{ marginRight: "1rem" }}>Admin</Link>
           <Link to="/admin/orders" style={{ marginRight: "1rem" }}>Нарачки</Link>
+          <Link to="/admin/users">Корисници</Link>
         </>
       )}
 

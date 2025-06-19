@@ -9,6 +9,8 @@ import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
 import AdminOrders from "./pages/AdminOrders";
 import MyOrders from "./pages/MyOrders";
+import AdminUsers from "./pages/AdminUsers";
+import AdminUserDetails from "./pages/AdminUserDetalis";
 
 
 
@@ -27,6 +29,11 @@ const App = () => {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/orders" element={<AdminOrders />} />
           <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/users/:id" element={<AdminUserDetails />} />
+          
+          
+          {/* Redirect to home for any unmatched routes */}
           
         </Routes>
       </div>

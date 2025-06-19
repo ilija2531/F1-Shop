@@ -57,3 +57,24 @@ exports.deleteMyOrder = async (req, res) => {
     res.status(500).json({ error: "Грешка при откажување на нарачката." });
   }
 };
+
+exports.statusUpdateOrder = async (req, res) => {const { status } = req.body;
+  const allowed = ["pending", "approved", "shipped", "delivered", "cancelled"];
+
+  if (!allowed.includes(status)) {
+    return res.status(400).json({ message: "Невалиден статус." });
+  }
+
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) return res.status(404).json({ message: "Нарачката не е пронајдена." });
+
+    order.status = status;
+    await order.save();
+
+    res.json({ message: "Статусот е променет успешно.", order });
+  } catch (err) {
+    console.error("Грешка при промена на статус:", err.message);
+    res.status(500).json({ message: "Внатрешна грешка." });
+  }
+};
