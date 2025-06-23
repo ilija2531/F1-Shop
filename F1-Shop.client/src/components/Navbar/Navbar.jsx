@@ -15,6 +15,7 @@ const Navbar = () => {
             <Link to="/products">Производи</Link>
             <Link to="/cart">Кошничка</Link>
             <Link to="/my-orders">Мои нарачки</Link>
+            <Link to="/profile"> Профил</Link>
           </>
         )}
 

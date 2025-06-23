@@ -26,7 +26,15 @@ const ProductDetails = () => {
   return (
     <div>
       <h2>{product.name}</h2>
-      <img src={product.image} alt={product.name} width="300" />
+     <img
+    src={
+    product.image.startsWith("http")
+      ? product.image
+      : `http://localhost:5000${product.image.startsWith("/") ? product.image : "/" + product.image}`
+  }
+  alt={product.name}
+  width="300"
+/>
       <p>{product.description}</p>
       <p>Цена: {product.price} ден</p>
       <p>Достапност: {product.inStock ? "На залиха" : "Недостапно"}</p>

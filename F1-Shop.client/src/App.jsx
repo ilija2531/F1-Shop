@@ -13,6 +13,7 @@ import AdminUsers from "./pages/AdminUsers";
 import AdminUserDetails from "./pages/AdminUserDetalis";
 import WelcomePage from "./pages/welcome/WelcomePage";
 import ProductListPage from "./pages/productlist/ProductListPage";
+import ProfilePage from "./pages/ProfilePage";
 
 
 
@@ -24,7 +25,7 @@ const App = () => {
          
           <Route path="/" element={<WelcomePage />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/users/:id" element={<AdminUserDetails />} />
           <Route path="/products" element={<ProductListPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           
           
           {/* Redirect to home for any unmatched routes */}

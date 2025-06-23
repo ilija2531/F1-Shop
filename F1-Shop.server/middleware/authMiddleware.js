@@ -1,16 +1,31 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
-const auth = (req, res, next) => {
-  const token = req.header("Authorization");
+const auth = async (req, res, next) => {
+  const rawToken = req.header("Authorization");
+  console.log("👉 TOKEN:", rawToken);
 
-  if (!token) return res.status(401).json({ message: "Access Denied. No token provided." });
+  if (!rawToken || !rawToken.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Access Denied. No token provided." });
+  }
+
+  const token = rawToken.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token.replace("Bearer ", ""), process.env.JWT_SECRET);
-    req.user = decoded;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    // ✅ Вчитување на user од базата
+    const user = await User.findById(decoded.userId).select("-password");
+    if (!user) {
+      return res.status(404).json({ message: "Корисникот не е пронајден." });
+    }
+
+    req.user = user;
+    console.log("✅ Logged in as:", user.email);
     next();
   } catch (err) {
-    res.status(400).json({ message: "Invalid token." });
+    console.error("❌ JWT verify error:", err.message);
+    res.status(401).json({ message: "Invalid token." });
   }
 };
 

@@ -3,6 +3,7 @@ const router = express.Router();
 const { getProducts, createProduct } = require("../controllers/productController");
 const { auth, isAdmin } = require("../middleware/authMiddleware");
 const upload = require("../middleware/uploadMiddleware");
+const Product = require("../models/Product");
 
 /**
  * @swagger

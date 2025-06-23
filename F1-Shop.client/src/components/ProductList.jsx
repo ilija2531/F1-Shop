@@ -1,34 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { getProducts } from "../api/products";
 import { useCart } from "../context/CartContext";
 
-const ProductList = () => {
-  const [products, setProducts] = useState([]);
+const ProductList = ({ products }) => {
   const { dispatch } = useCart();
-
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const data = await getProducts();
-        console.log("Loaded products:", data); // Debug
-        setProducts(data);
-      } catch (err) {
-        console.error("Failed to fetch products:", err.message);
-      }
-    };
-
-    loadProducts();
-  }, []);
 
   const handleAddToCart = (product) => {
     dispatch({ type: "ADD_TO_CART", payload: product });
   };
 
+  if (!Array.isArray(products)) {
+    return <p style={{ color: "red" }}>⚠ Проблем: Производите не се валидна листа.</p>;
+  }
+
   return (
     <div className="product-list" style={{ padding: "2rem" }}>
       <h2>🏎️ F1 Производи</h2>
-      <div className="products" style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+      <div
+        className="products"
+        style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}
+      >
         {products.map((product) => (
           <div
             key={product._id}
@@ -40,7 +31,10 @@ const ProductList = () => {
               borderRadius: "8px",
             }}
           >
-            <Link to={`/product/${product._id}`} style={{ textDecoration: "none", color: "inherit" }}>
+            <Link
+              to={`/products/${product._id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <img
                 src={`http://localhost:5000${product.image}`}
                 alt={product.name}
