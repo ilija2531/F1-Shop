@@ -6,20 +6,25 @@ const storage = multer.diskStorage({
     cb(null, "uploads/");
   },
   filename(req, file, cb) {
-    cb(null, `${Date.now()}-${file.originalname}`);
+    cb(null, `${Date.now()}-${file.originalname.replace(/\s+/g, "-")}`);
   },
 });
 
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png/;
-  const ext = path.extname(file.originalname).toLowerCase();
-  if (allowedTypes.test(ext)) {
-    cb(null, true);
-  } else {
-    cb("Невалиден тип на слика. Само jpg, jpeg, png.");
-  }
-};
+const upload = multer({
+  storage,
+  fileFilter(req, file, cb) {
+    const filetypes = /jpg|jpeg|png/;
+    const extname = filetypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+    const mimetype = filetypes.test(file.mimetype);
 
-const upload = multer({ storage, fileFilter });
+    if (extname && mimetype) {
+      cb(null, true);
+    } else {
+      cb("Само JPG, JPEG или PNG фајлови се дозволени");
+    }
+  },
+});
 
 module.exports = upload;

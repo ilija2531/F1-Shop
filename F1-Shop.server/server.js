@@ -3,6 +3,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const setupSwagger = require("./config/swagger.js");
+const upload = require("./middleware/uploadMiddleware.js");
 
 const authRoutes = require("./routes/authRoutes.js");
 const productRoutes = require("./routes/productRoutes");

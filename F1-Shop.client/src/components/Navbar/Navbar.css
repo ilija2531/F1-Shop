@@ -2,74 +2,85 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background: #ffffff;
-  border-bottom: 1px solid #eaeaea;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.navbar a {
-  margin-right: 1.2rem;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.navbar a:hover {
-  color: #007bff;
+  background-color: #f2f2f2;
+  padding: 1rem;
+  position: relative;
 }
 
 .navbar-left,
 .navbar-right {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  gap: 1rem;
+}
+.navbar-links {
+  display: flex;
+  gap: 1rem;
 }
 
-.username {
-  margin-right: 1rem;
+.navbar a {
+  text-decoration: none;
+  color: #333;
   font-weight: 500;
-  color: #444;
+}
+
+.navbar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #ccc;
 }
 
 .logout-btn {
-  padding: 0.5rem 1rem;
-  background-color: #ef4444;
+  background-color: #d9534f;
   color: white;
   border: none;
-  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.3s ease;
 }
 
-.logout-btn:hover {
-  background-color: #dc2626;
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+  margin-right: 1rem;
 }
 
 @media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  .menu-toggle {
+    display: block;
   }
 
-  .navbar-left,
-  .navbar-right {
+  .navbar-left {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .navbar a {
-    margin-right: 0;
-    margin-bottom: 0.5rem;
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    background-color: #fff;
+    position: absolute;
+    top: 60px;
+    left: 1rem;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    width: 200px;
+    border: 1px solid #ddd;
   }
 
-  .logout-btn {
-    margin-top: 0.5rem;
+  
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links a {
+    margin: 0.3rem 0;
   }
 }
