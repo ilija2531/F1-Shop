@@ -21,3 +21,15 @@ export const getProductById = async (id) => {
   const res = await API.get(`/products/${id}`);
   return res.data;
 };
+
+export const deleteProduct = async (id) => {
+  const token = localStorage.getItem("token");
+
+  const res = await axios.delete(`http://localhost:5000/api/products/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return res.data;
+};

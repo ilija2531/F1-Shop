@@ -57,6 +57,7 @@ const AdminPage = () => {
       alert(err.response?.data?.message || "Грешка при додавање производ.");
       console.error(err);
     }
+    window.location.href = "/products"; 
   };
 
   if (!user || !user.isAdmin) {

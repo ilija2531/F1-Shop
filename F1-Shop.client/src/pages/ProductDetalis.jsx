@@ -2,11 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductById } from "../api/products";
 import { useCart } from "../context/CartContext";
+import {deleteProduct} from "../api/products"; 
+import { useAuth } from "../context/AuthContext";
+
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const { dispatch } = useCart();
+  const { user } = useAuth();
+
+
+  const handleDelete = async (id) => {
+  if (window.confirm("Дали сте сигурни дека сакате да го избришете овој производ?")) {
+    try {
+      await deleteProduct(id);
+      alert("Производот е избришан.");
+      loadProducts(); 
+    } catch (err) {
+      console.error("Грешка при бришење:", err.message);
+      alert("Настана грешка при бришење.");
+    }
+    window.location.href = "/products"; 
+  }
+};
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -41,6 +60,13 @@ const ProductDetails = () => {
       <button onClick={() => dispatch({ type: "ADD_TO_CART", payload: product })}>
         Додај во кошничка
       </button>
+    {user?.isAdmin && (
+  <button onClick={() => handleDelete(product._id)} className="delete-btn">
+    🗑️ Избриши
+  </button>
+)}
+
+
     </div>
   );
 };

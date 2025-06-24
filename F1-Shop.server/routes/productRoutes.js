@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const { getProducts, createProduct } = require("../controllers/productController");
@@ -43,7 +44,7 @@ router.get("/", getProducts); // everyone
  *       201:
  *         description: Производот е креиран
  */
-router.post("/", auth, isAdmin, createProduct); // admin only
+router.post("/", auth, isAdmin, createProduct);
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -58,6 +59,26 @@ router.post("/upload", auth, isAdmin, upload.single("image"), (req, res) => {
     return res.status(400).json({ message: "No file uploaded" });
   }
   res.json({ imageUrl: `/uploads/${req.file.filename}` });
+});
+
+router.delete("/:id", auth, isAdmin, async (req, res) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: "Невалиден ID." });
+    }
+
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+
+    if (!deletedProduct) {
+      return res.status(404).json({ message: "Производот не е пронајден." });
+    }
+
+    console.log("🗑️ Избришан производ:", deletedProduct._id);
+    res.json({ message: "✅ Производот е избришан успешно." });
+  } catch (err) {
+    console.error("❌ Error deleting product:", err.message);
+    res.status(500).json({ error: "Грешка при бришење на производот." });
+  }
 });
 
 
