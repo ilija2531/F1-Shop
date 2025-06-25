@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 const RegisterPage = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -22,14 +31,53 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
-      <h2>Регистрација</h2>
-      <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Име" onChange={handleChange} required />
-        <input name="email" type="email" placeholder="Email" onChange={handleChange} required />
-        <input name="password" type="password" placeholder="Лозинка" onChange={handleChange} required />
-        <button type="submit">Регистрирај се</button>
-      </form>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <Card className="w-full max-w-md p-4">
+        <CardHeader>
+          <CardTitle className="text-center">📝 Регистрација</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <Label htmlFor="name">Име</Label>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Вашето име"
+                value={form.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="password">Лозинка</Label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <Button type="submit" className="w-full">Регистрирај се</Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 };

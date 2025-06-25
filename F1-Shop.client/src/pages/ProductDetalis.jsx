@@ -13,19 +13,20 @@ const ProductDetails = () => {
   const { user } = useAuth();
 
 
-  const handleDelete = async (id) => {
+ const handleDelete = async (id) => {
   if (window.confirm("Дали сте сигурни дека сакате да го избришете овој производ?")) {
     try {
       await deleteProduct(id);
-      alert("Производот е избришан.");
-      loadProducts(); 
+      alert("✅ Производот е избришан.");
+      
+      window.location.href = "/products";
     } catch (err) {
-      console.error("Грешка при бришење:", err.message);
+      console.error("❌ Грешка при бришење:", err.message);
       alert("Настана грешка при бришење.");
     }
-    window.location.href = "/products"; 
   }
 };
+
 
   useEffect(() => {
     const fetchProduct = async () => {

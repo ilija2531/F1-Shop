@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "./components/theme-provider";
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetalis";
 import CartPage from "./pages/CartPage";
@@ -19,6 +20,7 @@ import ProfilePage from "./pages/ProfilePage";
 
 const App = () => {
   return (
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
     <Router>
       <div className="app">
         <Routes>
@@ -44,6 +46,7 @@ const App = () => {
         </Routes>
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

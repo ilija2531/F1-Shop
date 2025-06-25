@@ -47,16 +47,18 @@ const getProducts = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const { name, description, team, price, image } = req.body;
+    const { name, description,category, team, driver, price, image } = req.body;
 
-    if (!name || !price || !team || !image) {
+    if (!name ||!category || !price || !team || !driver || !image) {
       return res.status(400).json({ message: "Сите полиња се задолжителни." });
     }
 
     const product = new Product({
       name,
+      category,
       description,
       team,
+      driver,
       price,
       image,
     });
