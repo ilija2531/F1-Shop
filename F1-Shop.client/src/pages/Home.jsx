@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar />
+      
 
       <div style={{ padding: "2rem", textAlign: "center" }}>
         <h1>🏁 Добредојде во F1 Продавницата!</h1>

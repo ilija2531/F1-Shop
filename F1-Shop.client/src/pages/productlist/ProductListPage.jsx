@@ -41,7 +41,7 @@ const ProductListPage = () => {
 
   return (
     <div>
-      <Navbar />
+      
 
       <div className="product-list-page">
         <h2>🛒 F1 Производи</h2>

@@ -15,13 +15,14 @@ import AdminUserDetails from "./pages/AdminUserDetalis";
 import WelcomePage from "./pages/welcome/WelcomePage";
 import ProductListPage from "./pages/productlist/ProductListPage";
 import ProfilePage from "./pages/ProfilePage";
-
+import Layout from "./components/Layout";
 
 
 const App = () => {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
     <Router>
+    <Layout>
       <div className="app">
         <Routes>
          
@@ -45,6 +46,7 @@ const App = () => {
           
         </Routes>
       </div>
+    </Layout>
     </Router>
     </ThemeProvider>
   );

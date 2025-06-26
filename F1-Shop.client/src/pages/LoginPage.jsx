@@ -33,8 +33,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card className="w-full max-w-md p-4">
+    <div className="flex justify-center items-center min-h-screen">
+      <Card className="w-full max-w-md p-6 backdrop-blur-sm bg-white/80 dark:bg-black/80 shadow-xl">
         <CardHeader>
           <CardTitle className="text-center">🔐 Најава</CardTitle>
         </CardHeader>
