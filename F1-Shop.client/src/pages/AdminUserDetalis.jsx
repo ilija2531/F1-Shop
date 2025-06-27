@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getUserById } from "../api/users";
 import { useAuth } from "../context/AuthContext";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent
+} from "@/components/ui/card";
 
 const AdminUserDetails = () => {
   const { id } = useParams();
@@ -21,16 +27,22 @@ const AdminUserDetails = () => {
     if (user?.isAdmin) load();
   }, [id, user]);
 
-  if (!user?.isAdmin) return <p>❌ Немате пристап.</p>;
-  if (!userInfo) return <p>Вчитување...</p>;
+  if (!user?.isAdmin) return <p className="text-center text-destructive">❌ Немате пристап.</p>;
+  if (!userInfo) return <p className="text-center">Вчитување...</p>;
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>👤 Детали за корисник</h2>
-      <p><strong>Име:</strong> {userInfo.name}</p>
-      <p><strong>Email:</strong> {userInfo.email}</p>
-      <p><strong>Admin:</strong> {userInfo.isAdmin ? "Да" : "Не"}</p>
-      <p><strong>Регистриран на:</strong> {new Date(userInfo.createdAt).toLocaleString()}</p>
+    <div className="max-w-xl mx-auto p-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>👤 Детали за корисник</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p><strong>Име:</strong> {userInfo.name}</p>
+          <p><strong>Email:</strong> {userInfo.email}</p>
+          <p><strong>Admin:</strong> {userInfo.isAdmin ? "Да" : "Не"}</p>
+          <p><strong>Регистриран на:</strong> {new Date(userInfo.createdAt).toLocaleString()}</p>
+        </CardContent>
+      </Card>
     </div>
   );
 };

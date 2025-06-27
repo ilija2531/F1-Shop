@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { getMyOrders, deleteMyOrder } from "../api/orders";
 import { useAuth } from "../context/AuthContext";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 const MyOrders = () => {
   const { user } = useAuth();
@@ -26,69 +34,71 @@ const MyOrders = () => {
     try {
       await deleteMyOrder(orderId);
       alert("Нарачката е откажана.");
-      loadOrders(); 
+      loadOrders();
     } catch (err) {
       alert(err.response?.data?.message || "Грешка при откажување.");
     }
   };
 
-  if (!user) return <p>Мора да сте најавени за да ги видите вашите нарачки.</p>;
+  if (!user) return <p className="text-center">Мора да сте најавени за да ги видите вашите нарачки.</p>;
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>🛍️ Моите нарачки</h2>
-      {orders.length === 0 ? (
-        <p>Немате направено ниту една нарачка.</p>
-      ) : (
-        <table border="1" cellPadding="8" style={{ borderCollapse: "collapse", width: "100%" }}>
-          <thead>
-            <tr>
-              <th>Производи</th>
-              <th>Вкупно</th>
-              <th>Платено</th>
-              <th>Датум</th>
-              <th>Акција</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>
-                  <ul style={{ paddingLeft: "1rem" }}>
-                    {order.items.map((item, idx) => (
-                      <li key={idx}>
-                        {item.product?.name} × {item.quantity}
-                      </li>
-                    ))}
-                  </ul>
-                </td>
-                <td>{order.totalPrice} ден</td>
-                <td>{order.isPaid ? "✅ Да" : "❌ Не"}</td>
-                <td>{new Date(order.createdAt).toLocaleString()}</td>
-                <td>
-                  {!order.isPaid ? (
-                    <button
-                      onClick={() => handleCancel(order._id)}
-                      style={{
-                        backgroundColor: "red",
-                        color: "#fff",
-                        border: "none",
-                        padding: "0.3rem 0.6rem",
-                        cursor: "pointer",
-                        borderRadius: "4px",
-                      }}
-                    >
-                      Откажи
-                    </button>
-                  ) : (
-                    <span style={{ color: "#888" }}>Нема</span>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+    <div className="max-w-5xl mx-auto p-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>🛍️ Моите нарачки</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {orders.length === 0 ? (
+            <p className="text-center">Немате направено ниту една нарачка.</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="border-b bg-muted">
+                    <th className="text-left p-2">Производи</th>
+                    <th className="text-left p-2">Вкупно</th>
+                    <th className="text-left p-2">Платено</th>
+                    <th className="text-left p-2">Датум</th>
+                    <th className="text-left p-2">Акција</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.map((order) => (
+                    <tr key={order._id} className="border-b hover:bg-muted/30">
+                      <td className="p-2">
+                        <ul className="list-disc pl-4">
+                          {order.items.map((item, idx) => (
+                            <li key={idx}>
+                              {item.product?.name} × {item.quantity}
+                            </li>
+                          ))}
+                        </ul>
+                      </td>
+                      <td className="p-2">{order.totalPrice} ден</td>
+                      <td className="p-2">{order.isPaid ? "✅ Да" : "❌ Не"}</td>
+                      <td className="p-2">{new Date(order.createdAt).toLocaleString()}</td>
+                      <td className="p-2">
+                        {!order.isPaid ? (
+                          <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => handleCancel(order._id)}
+                          >
+                            Откажи
+                          </Button>
+                        ) : (
+                          <span className="text-muted-foreground text-xs">Нема</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 };

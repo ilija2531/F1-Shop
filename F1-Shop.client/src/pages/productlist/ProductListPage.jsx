@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../../api/products";
 import ProductList from "../../components/ProductList";
-import Navbar from "../../components/Navbar/Navbar";
 import "./ProductListPage.css";
 
 const ProductListPage = () => {
