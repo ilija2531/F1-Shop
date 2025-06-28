@@ -112,7 +112,7 @@ const AdminPage = () => {
                 required
               >
                 <option value="">-- Избери категорија --</option>
-                <option value="Облека">Облека</option>
+                <option value="Патики">Патики</option>
                 <option value="Кациги">Кациги</option>
                 <option value="Комбинезони">Комбинезони</option>
                 <option value="Маици">Маици</option>
@@ -122,11 +122,25 @@ const AdminPage = () => {
 
             <div>
               <Label htmlFor="team">Тим</Label>
-              <Input
+              <select
                 name="team"
                 value={form.team}
                 onChange={handleChange}
-              />
+                className="w-full border rounded-md px-2 py-1"
+                
+                >
+                <option value="">-- Избери тим --</option>
+                <option value="Red Bull">Red Bull</option>
+                <option value="Mercedes">Mercedes</option>
+                <option value="Ferrari">Ferrari</option>
+                <option value="McLaren">McLaren</option>
+                <option value="Alpine">Alpine</option>
+                <option value="Aston Martin">Aston Martin</option>
+                <option value="Haas">Haas</option>
+                <option value="Sauber">Sauber</option>
+                <option value="Williams">Williams</option>
+                <option value="Racing Bulls">Racing Bulls</option>
+                </select>
             </div>
 
             <div>
@@ -136,7 +150,7 @@ const AdminPage = () => {
                 value={form.driver}
                 onChange={handleChange}
                 className="w-full border rounded-md px-2 py-1"
-                required
+                
               >
                 <option value="">-- Избери возач --</option>
                 <option value="Max Verstappen">Max Verstappen</option>
@@ -152,6 +166,9 @@ const AdminPage = () => {
                 <option value="Michael Schumacher">Michael Schumacher</option>
                 <option value="Daniel Ricciardo">Daniel Ricciardo</option>
                 <option value="Jenson Button">Jenson Button</option>
+                <option value="Kimi Raikkonen">Kimi Raikkonen</option>
+                <option value="Esteban Ocon">Esteban Ocon</option>
+                <option value="Oliver Bearman">Oliver Bearman</option>
               </select>
             </div>
 

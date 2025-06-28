@@ -55,7 +55,7 @@ const createProduct = async (req, res) => {
   try {
     const { name, description,category, team, driver, price, image } = req.body;
 
-    if (!name ||!category || !price || !team || !driver || !image) {
+    if (!name ||!category || !price || !image) {
       return res.status(400).json({ message: "Сите полиња се задолжителни." });
     }
 

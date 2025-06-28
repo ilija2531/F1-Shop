@@ -31,7 +31,7 @@ const ProductListPage = () => {
           max: maxPrice,
           name: searchTerm,
           page: currentPage,
-          limit: 6,
+          limit: 10,
         });
         setProducts(data.products || []);
         setTotalPages(data.totalPages || 1);
@@ -104,10 +104,10 @@ const ProductListPage = () => {
         />
       </div>
 
-      {/* Products */}
+      
       <ProductList products={products} />
 
-      {/* Pagination */}
+     
       <div style={{ marginTop: "2rem", textAlign: "center" }}>
         {Array.from({ length: totalPages }, (_, i) => (
           <button
