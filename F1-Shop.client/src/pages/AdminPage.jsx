@@ -114,7 +114,7 @@ const AdminPage = () => {
                 <option value="">-- Избери категорија --</option>
                 <option value="Облека">Облека</option>
                 <option value="Кациги">Кациги</option>
-                <option value="Постери">Постери</option>
+                <option value="Комбинезони">Комбинезони</option>
                 <option value="Маици">Маици</option>
                 <option value="Капи">Капи</option>
               </select>
@@ -140,10 +140,18 @@ const AdminPage = () => {
               >
                 <option value="">-- Избери возач --</option>
                 <option value="Max Verstappen">Max Verstappen</option>
+                <option value="Sergio Perez">Sergio Perez</option>
+                <option value="Carlos Sainz">Carlos Sainz</option>
+                <option value="Sebastian Vettel">Sebastian Vettel</option>
+                <option value="George Russell">George Russell</option>
+                <option value="Oscar Piastri">Oscar Piastri</option>
                 <option value="Lewis Hamilton">Lewis Hamilton</option>
                 <option value="Charles Leclerc">Charles Leclerc</option>
                 <option value="Fernando Alonso">Fernando Alonso</option>
                 <option value="Lando Norris">Lando Norris</option>
+                <option value="Michael Schumacher">Michael Schumacher</option>
+                <option value="Daniel Ricciardo">Daniel Ricciardo</option>
+                <option value="Jenson Button">Jenson Button</option>
               </select>
             </div>
 

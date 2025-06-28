@@ -5,18 +5,19 @@ import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   return (
-  <div
-  className="min-h-screen bg-cover bg-center"
-  style={{ backgroundImage: `url(${bgImage})` }}
->
-  <div className="min-h-screen backdrop-blur-sm bg-white/70 dark:bg-black/70 text-black dark:text-white">
-    <Navbar />
-    <main className="pt-4 px-4">{children}</main>
-    <Footer/>
-  </div>
-</div>
+    <div
+      className="min-h-screen bg-cover bg-center flex flex-col"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
+      {/* Overlay со blur и боја */}
+      <div className="flex flex-col flex-grow backdrop-blur-sm bg-white/70 dark:bg-black/70 text-black dark:text-white min-h-screen">
+        <Navbar />
+        
+        <main className="flex-grow pt-4 px-4">{children}</main>
 
-
+        <Footer />
+      </div>
+    </div>
   );
 };
 

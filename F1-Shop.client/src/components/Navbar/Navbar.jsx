@@ -35,6 +35,7 @@ const Navbar = () => {
             <>
               <Link to="/home">Дома</Link>
               <Link to="/products">Производи</Link>
+              <Link to="/categories">Категории</Link>
             </>
           )}
 

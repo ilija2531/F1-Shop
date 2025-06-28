@@ -16,6 +16,7 @@ import WelcomePage from "./pages/welcome/WelcomePage";
 import ProductListPage from "./pages/productlist/ProductListPage";
 import ProfilePage from "./pages/ProfilePage";
 import Layout from "./components/Layout";
+import CategoriesPage from "./pages/CategoriesPage";
 
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/admin/users/:id" element={<AdminUserDetails />} />
           <Route path="/products" element={<ProductListPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/categories" element={<CategoriesPage />} />
           
           
           {/* Redirect to home for any unmatched routes */}

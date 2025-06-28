@@ -9,6 +9,7 @@ export const getProducts = async (filters = {}) => {
   if (filters.max) params.append("max", filters.max);
   if (filters.name) params.append("name", filters.name); 
   if (filters.page) params.append("page", filters.page);
+  if (filters.category) params.append("category", filters.category);
   if (filters.limit) params.append("limit", filters.limit);
 
   const res = await axios.get(`http://localhost:5000/api/products?${params.toString()}`);

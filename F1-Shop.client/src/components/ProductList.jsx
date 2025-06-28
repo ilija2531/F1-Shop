@@ -16,7 +16,6 @@ const ProductList = ({ products }) => {
 
   return (
     <div className="px-6 py-8">
-      <h2 className="text-xl font-bold mb-6">🏎️ F1 Производи</h2>
       <div className="flex flex-wrap gap-6 justify-center">
         {products.map((product) => (
           <div
