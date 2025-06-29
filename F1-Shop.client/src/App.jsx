@@ -17,6 +17,8 @@ import ProductListPage from "./pages/productlist/ProductListPage";
 import ProfilePage from "./pages/ProfilePage";
 import Layout from "./components/Layout";
 import CategoriesPage from "./pages/CategoriesPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 
 
 const App = () => {
@@ -42,6 +44,9 @@ const App = () => {
           <Route path="/products" element={<ProductListPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/categories" element={<CategoriesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+
           
           
           {/* Redirect to home for any unmatched routes */}
