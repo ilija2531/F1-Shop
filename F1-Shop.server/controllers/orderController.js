@@ -4,7 +4,7 @@ exports.createOrder = async (req, res) => {
   try {
     const { items, totalPrice } = req.body;
     const order = new Order({
-      user: req.user.userId,
+      user: req.user._id,
       items,
       totalPrice,
     });
@@ -18,7 +18,7 @@ exports.createOrder = async (req, res) => {
 
 exports.getMyOrders = async (req, res) => {
   try {
-    const orders = await Order.find({ user: req.user.userId }).populate("items.product");
+    const orders = await Order.find({ user: req.user._id }).populate("items.product");
     res.json(orders);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -42,7 +42,7 @@ exports.deleteMyOrder = async (req, res) => {
       return res.status(404).json({ message: "Нарачката не е пронајдена." });
     }
 
-    if (!order.user || order.user.toString() !== req.user.userId) {
+    if (!order.user || order.user.toString() !== req.user.id.toString()) {
       return res.status(403).json({ message: "Немате дозвола да ја откажете оваа нарачка." });
     }
 
