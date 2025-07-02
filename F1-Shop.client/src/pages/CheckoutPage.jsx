@@ -3,55 +3,41 @@ import { useCart } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
-import { sendOrderEmail } from "../../utils/sendOrderEmail";
 
 import {
   Card,
   CardContent,
   CardHeader,
-  CardTitle
+  CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 const CheckoutPage = () => {
-  const { cart, dispatch } = useCart();
+  const { cart } = useCart();
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
 
   const handleCheckout = async () => {
-    const token = localStorage.getItem("token");
-
-    const items = cart.map((item) => ({
-      product: item._id,
-      quantity: item.quantity,
-    }));
-
     try {
-   
-      await axios.post(
-        "http://localhost:5000/api/orders",
-        { items, totalPrice: total },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-     
-      await sendOrderEmail({
-        name: user.name,
-        email: user.email,
-        orderItems: cart,
-        total,
+      const res = await axios.post("http://localhost:5000/api/payments/create-checkout-session", {
+        items: cart,
+        user: {
+          name: user.name,
+          email: user.email,
+        },
       });
 
       
-      dispatch({ type: "CLEAR_CART" });
-      alert("Нарачката е успешно направена и испратена по е-пошта!");
-      navigate("/");
+      window.location.href = res.data.url;
     } catch (err) {
-      console.error("Нарачка не успеа:", err.response?.data || err.message);
-      alert("Мора да сте најавени за да направите нарачка.");
+      console.error("Stripe error:", err);
+      alert("Настана грешка при плаќањето.");
     }
   };
 
