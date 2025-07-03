@@ -27,6 +27,13 @@ const SuccessPage = () => {
         const email = session.metadata.userEmail;
         const name = session.metadata.userName;
 
+        const shipping = {
+    fullName: name,
+    address: session.metadata.address,
+    city: session.metadata.city,
+    phone: session.metadata.phone,
+    };
+
         const token = localStorage.getItem("token");
 
         const items = cart.map((item) => ({
@@ -41,6 +48,7 @@ const SuccessPage = () => {
             items,
             totalPrice: total,
             stripeSessionId: sessionId, 
+            shipping,
           },
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -53,6 +61,7 @@ const SuccessPage = () => {
             email,
             orderItems: cart,
             total,
+            shipping,
           });
         }
 

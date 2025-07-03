@@ -1,16 +1,22 @@
-
 import emailjs from "@emailjs/browser";
 
-export const sendOrderEmail = async ({ name, email, orderItems, total }) => {
+export const sendOrderEmail = async ({ name, email, orderItems, total, shipping }) => {
   const orderText = orderItems
     .map((item) => `${item.name} × ${item.quantity}`)
     .join("\n");
 
+  const shippingText = `
+👤 ${shipping.fullName}
+🏠 ${shipping.address}, ${shipping.city}
+📞 ${shipping.phone}
+`.trim();
+
   const templateParams = {
     name,
+    email,
     order: orderText,
     total,
-    email,
+    shipping: shippingText,
   };
 
   return await emailjs.send(

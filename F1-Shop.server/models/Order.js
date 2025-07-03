@@ -16,6 +16,12 @@ const orderSchema = new mongoose.Schema({
     enum: ["pending", "approved", "shipped", "delivered", "cancelled"],
     default: "pending",
   },
+  shipping:{
+    fullName: { type: String },
+    address: { type: String },
+    city: { type: String },
+    phone: { type: String },
+  },
   stripeSessionId: { type: String, unique: true, sparse: true }
 
 }, { timestamps: true });

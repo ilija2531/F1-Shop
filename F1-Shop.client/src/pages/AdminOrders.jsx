@@ -5,9 +5,8 @@ import {
   Card,
   CardHeader,
   CardTitle,
-  CardContent
+  CardContent,
 } from "@/components/ui/card";
-import { Select } from "@/components/ui/select";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 const AdminOrders = () => {
@@ -44,7 +43,11 @@ const AdminOrders = () => {
   };
 
   if (!user || (!user.isAdmin && user.role !== "admin")) {
-    return <p className="text-center text-destructive">❌ Немате пристап до оваа страница.</p>;
+    return (
+      <p className="text-center text-destructive">
+        ❌ Немате пристап до оваа страница.
+      </p>
+    );
   }
 
   return (
@@ -64,6 +67,7 @@ const AdminOrders = () => {
                 <thead className="bg-black text-white">
                   <tr>
                     <th className="p-2 border">Корисник</th>
+                    <th className="p-2 border">Испорака</th>
                     <th className="p-2 border">Производи</th>
                     <th className="p-2 border">Вкупно</th>
                     <th className="p-2 border">Платено</th>
@@ -74,11 +78,43 @@ const AdminOrders = () => {
                 <tbody>
                   {orders.map((order) => (
                     <tr key={order._id} className="hover:bg-muted/30">
-                      <td className="p-2 border">
-                        {order.user?.name} ({order.user?.email})
+                      
+                      <td className="p-2 border align-top">
+                        {order.user?.name} <br />
+                        <span className="text-xs text-muted-foreground">
+                          {order.user?.email}
+                        </span>
                       </td>
-                      <td className="p-2 border">
-                        <ul className="list-disc pl-5">
+
+                      
+                      <td className="p-2 border align-top text-xs leading-5">
+                        {order.shipping?.fullName && (
+                          <>
+                            👤 {order.shipping.fullName} <br />
+                          </>
+                        )}
+                        {order.shipping?.address && (
+                          <>
+                            📍 {order.shipping.address}, {order.shipping.city}
+                            <br />
+                          </>
+                        )}
+                        {order.shipping?.phone && (
+                          <>
+                            📞 {order.shipping.phone}
+                            <br />
+                          </>
+                        )}
+                        {order.shipping?.notes && (
+                          <>
+                            📝 <em>{order.shipping.notes}</em>
+                          </>
+                        )}
+                      </td>
+
+                      
+                      <td className="p-2 border align-top">
+                        <ul className="list-disc pl-4 text-xs">
                           {order.items.map((item, idx) => (
                             <li key={idx}>
                               {item.product?.name} × {item.quantity}
@@ -86,14 +122,30 @@ const AdminOrders = () => {
                           ))}
                         </ul>
                       </td>
-                      <td className="p-2 border">{order.totalPrice} ден</td>
-                      <td className="p-2 border">{order.isPaid ? "✅ Да" : "❌ Не"}</td>
-                      <td className="p-2 border">{new Date(order.createdAt).toLocaleString()}</td>
-                      <td className="p-2 border">
+
+                     
+                      <td className="p-2 border align-top font-semibold">
+                        {order.totalPrice} ден
+                      </td>
+
+                      
+                      <td className="p-2 border align-top text-center">
+                        {order.isPaid ? "✅" : "❌"}
+                      </td>
+
+                      
+                      <td className="p-2 border align-top text-xs">
+                        {new Date(order.createdAt).toLocaleString("mk-MK")}
+                      </td>
+
+                     
+                      <td className="p-2 border align-top">
                         <select
                           value={order.status}
-                          onChange={(e) => handleStatusChange(order._id, e.target.value)}
-                          className="border rounded px-2 py-1"
+                          onChange={(e) =>
+                            handleStatusChange(order._id, e.target.value)
+                          }
+                          className="border rounded px-2 py-1 text-sm"
                         >
                           <option value="pending">🕒 Pending</option>
                           <option value="approved">✅ Approved</option>

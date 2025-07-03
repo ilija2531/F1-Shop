@@ -2,7 +2,7 @@ const Order = require("../models/Order");
 
 exports.createOrder = async (req, res) => {
   try {
-    const { items, totalPrice,stripeSessionId } = req.body;
+    const { items, totalPrice,stripeSessionId, shipping } = req.body;
     if (!stripeSessionId) {
   return res.status(400).json({ error: "Недостасува Stripe Session ID." });
 }
@@ -19,6 +19,7 @@ if (existingOrder) {
       stripeSessionId,
       isPaid: true,
       paidAt: new Date(),
+      shipping,
     });
 
     await order.save();

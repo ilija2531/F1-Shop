@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           
           <div className="text-center md:text-left">
-            <p className="font-medium">© {new Date().getFullYear()} F1 Продавница</p>
+            <p className="font-medium">© {new Date().getFullYear()} F1 Shop</p>
             <p className="text-xs text-muted-foreground">
               Сите права се задржани.
             </p>

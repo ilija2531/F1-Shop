@@ -34,6 +34,10 @@ router.post("/create-checkout-session", async (req, res) => {
         total: items.reduce((sum, i) => sum + i.price * i.quantity, 0),
         userEmail: user.email,
         userName: user.name,
+        address: req.body.shipping?.address || "",
+        city: req.body.shipping?.city || "",
+        phone: req.body.shipping?.phone || "",
+        
       },
     });
 
