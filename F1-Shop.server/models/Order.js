@@ -16,6 +16,8 @@ const orderSchema = new mongoose.Schema({
     enum: ["pending", "approved", "shipped", "delivered", "cancelled"],
     default: "pending",
   },
+  stripeSessionId: { type: String, unique: true, sparse: true }
+
 }, { timestamps: true });
 
 module.exports = mongoose.model("Order", orderSchema);

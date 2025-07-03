@@ -13,7 +13,12 @@ const SuccessPage = () => {
     const finishOrder = async () => {
       if (!sessionId) return;
 
+      
+      const alreadyProcessed = localStorage.getItem(`processed_${sessionId}`);
+      if (alreadyProcessed) return;
+
       try {
+        
         const stripeRes = await axios.get(`http://localhost:5000/api/payments/session/${sessionId}`);
         const session = stripeRes.data;
 
@@ -22,35 +27,45 @@ const SuccessPage = () => {
         const email = session.metadata.userEmail;
         const name = session.metadata.userName;
 
-        
         const token = localStorage.getItem("token");
+
         const items = cart.map((item) => ({
           product: item._id,
           quantity: item.quantity,
         }));
 
-        await axios.post(
+       
+        const orderRes = await axios.post(
           "http://localhost:5000/api/orders",
-          { items, totalPrice: total },
-          { headers: { Authorization: `Bearer ${token}` } }
+          {
+            items,
+            totalPrice: total,
+            stripeSessionId: sessionId, 
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
 
-        
-        await sendOrderEmail({
-          name,
-          email,
-          orderItems: cart,
-          total,
-        });
+        if (orderRes.status === 201) {
+          await sendOrderEmail({
+            name,
+            email,
+            orderItems: cart,
+            total,
+          });
+        }
 
+        
         dispatch({ type: "CLEAR_CART" });
+        localStorage.setItem(`processed_${sessionId}`, "true");
       } catch (err) {
         console.error("❌ Неуспешна потврда:", err);
       }
     };
 
     finishOrder();
-  }, [sessionId]);
+  }, [sessionId, dispatch]);
 
   return (
     <div className="text-center mt-10">
