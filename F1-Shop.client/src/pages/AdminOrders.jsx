@@ -8,6 +8,9 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import FadeIn from "../components/FadeIn";
+import { Button } from "@/components/ui/button";
+import { exportOrdersToExcel } from "../../utils/exportToExcel";
 
 const AdminOrders = () => {
   const { user } = useAuth();
@@ -52,116 +55,121 @@ const AdminOrders = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>🧾 Сите нарачки</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {loading ? (
-            <p>Вчитување...</p>
-          ) : orders.length === 0 ? (
-            <p>Нема нарачки.</p>
-          ) : (
-            <ScrollArea className="overflow-x-auto">
-              <table className="w-full text-sm border">
-                <thead className="bg-black text-white">
-                  <tr>
-                    <th className="p-2 border">Корисник</th>
-                    <th className="p-2 border">Испорака</th>
-                    <th className="p-2 border">Производи</th>
-                    <th className="p-2 border">Вкупно</th>
-                    <th className="p-2 border">Платено</th>
-                    <th className="p-2 border">Датум</th>
-                    <th className="p-2 border">Статус</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {orders.map((order) => (
-                    <tr key={order._id} className="hover:bg-muted/30">
-                      
-                      <td className="p-2 border align-top">
-                        {order.user?.name} <br />
-                        <span className="text-xs text-muted-foreground">
-                          {order.user?.email}
-                        </span>
-                      </td>
+      <FadeIn className="mb-6" delay={0.2} duration={0.8}>
+        <Card>
+          <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <CardTitle>🧾 Сите нарачки</CardTitle>
+            {!loading && orders.length > 0 && (
+              <Button
+                variant="outline"
+                onClick={() => exportOrdersToExcel(orders)}
+              >
+                📥 Експорт во Excel
+              </Button>
+            )}
+          </CardHeader>
 
-                      
-                      <td className="p-2 border align-top text-xs leading-5">
-                        {order.shipping?.fullName && (
-                          <>
-                            👤 {order.shipping.fullName} <br />
-                          </>
-                        )}
-                        {order.shipping?.address && (
-                          <>
-                            📍 {order.shipping.address}, {order.shipping.city}
-                            <br />
-                          </>
-                        )}
-                        {order.shipping?.phone && (
-                          <>
-                            📞 {order.shipping.phone}
-                            <br />
-                          </>
-                        )}
-                        {order.shipping?.notes && (
-                          <>
-                            📝 <em>{order.shipping.notes}</em>
-                          </>
-                        )}
-                      </td>
-
-                      
-                      <td className="p-2 border align-top">
-                        <ul className="list-disc pl-4 text-xs">
-                          {order.items.map((item, idx) => (
-                            <li key={idx}>
-                              {item.product?.name} × {item.quantity}
-                            </li>
-                          ))}
-                        </ul>
-                      </td>
-
-                     
-                      <td className="p-2 border align-top font-semibold">
-                        {order.totalPrice} ден
-                      </td>
-
-                      
-                      <td className="p-2 border align-top text-center">
-                        {order.isPaid ? "✅" : "❌"}
-                      </td>
-
-                      
-                      <td className="p-2 border align-top text-xs">
-                        {new Date(order.createdAt).toLocaleString("mk-MK")}
-                      </td>
-
-                     
-                      <td className="p-2 border align-top">
-                        <select
-                          value={order.status}
-                          onChange={(e) =>
-                            handleStatusChange(order._id, e.target.value)
-                          }
-                          className="border rounded px-2 py-1 text-sm"
-                        >
-                          <option value="pending">🕒 Pending</option>
-                          <option value="approved">✅ Approved</option>
-                          <option value="shipped">🚚 Shipped</option>
-                          <option value="delivered">📦 Delivered</option>
-                          <option value="cancelled">❌ Cancelled</option>
-                        </select>
-                      </td>
+          <CardContent>
+            {loading ? (
+              <p>Вчитување...</p>
+            ) : orders.length === 0 ? (
+              <p>Нема нарачки.</p>
+            ) : (
+              <ScrollArea className="overflow-x-auto">
+                <table className="w-full text-sm border">
+                  <thead className="bg-black text-white">
+                    <tr>
+                      <th className="p-2 border">Корисник</th>
+                      <th className="p-2 border">Испорака</th>
+                      <th className="p-2 border">Производи</th>
+                      <th className="p-2 border">Вкупно</th>
+                      <th className="p-2 border">Платено</th>
+                      <th className="p-2 border">Датум</th>
+                      <th className="p-2 border">Статус</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </ScrollArea>
-          )}
-        </CardContent>
-      </Card>
+                  </thead>
+                  <tbody>
+                    {orders.map((order) => (
+                      <tr key={order._id} className="hover:bg-muted/30">
+                        <td className="p-2 border align-top">
+                          {order.user?.name} <br />
+                          <span className="text-xs text-muted-foreground">
+                            {order.user?.email}
+                          </span>
+                        </td>
+
+                        <td className="p-2 border align-top text-xs leading-5">
+                          {order.shipping?.fullName && (
+                            <>
+                              👤 {order.shipping.fullName} <br />
+                            </>
+                          )}
+                          {order.shipping?.address && (
+                            <>
+                              📍 {order.shipping.address},{" "}
+                              {order.shipping.city}
+                              <br />
+                            </>
+                          )}
+                          {order.shipping?.phone && (
+                            <>
+                              📞 {order.shipping.phone}
+                              <br />
+                            </>
+                          )}
+                          {order.shipping?.notes && (
+                            <>
+                              📝 <em>{order.shipping.notes}</em>
+                            </>
+                          )}
+                        </td>
+
+                        <td className="p-2 border align-top">
+                          <ul className="list-disc pl-4 text-xs">
+                            {order.items.map((item, idx) => (
+                              <li key={idx}>
+                                {item.product?.name} × {item.quantity}
+                              </li>
+                            ))}
+                          </ul>
+                        </td>
+
+                        <td className="p-2 border align-top font-semibold">
+                          {order.totalPrice} ден
+                        </td>
+
+                        <td className="p-2 border align-top text-center">
+                          {order.isPaid ? "✅" : "❌"}
+                        </td>
+
+                        <td className="p-2 border align-top text-xs">
+                          {new Date(order.createdAt).toLocaleString("mk-MK")}
+                        </td>
+
+                        <td className="p-2 border align-top">
+                          <select
+                            value={order.status}
+                            onChange={(e) =>
+                              handleStatusChange(order._id, e.target.value)
+                            }
+                            className="border rounded px-2 py-1 text-sm"
+                          >
+                            <option value="pending">🕒 Pending</option>
+                            <option value="approved">✅ Approved</option>
+                            <option value="shipped">🚚 Shipped</option>
+                            <option value="delivered">📦 Delivered</option>
+                            <option value="cancelled">❌ Cancelled</option>
+                          </select>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </ScrollArea>
+            )}
+          </CardContent>
+        </Card>
+      </FadeIn>
     </div>
   );
 };

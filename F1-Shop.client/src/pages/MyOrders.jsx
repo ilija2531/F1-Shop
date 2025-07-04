@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import FadeIn from "../components/FadeIn";
 
 const MyOrders = () => {
   const { user } = useAuth();
@@ -44,6 +45,8 @@ const MyOrders = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-6">
+      <FadeIn className="mb-6" delay={0.2} duration={0.8}>
+        <Separator />
       <Card>
         <CardHeader>
           <CardTitle>🛍️ Моите нарачки</CardTitle>
@@ -99,6 +102,7 @@ const MyOrders = () => {
           )}
         </CardContent>
       </Card>
+      </FadeIn>
     </div>
   );
 };

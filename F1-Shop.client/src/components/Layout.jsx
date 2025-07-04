@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
       className="min-h-screen bg-cover bg-center flex flex-col"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      {/* Overlay со blur и боја */}
+      
       <div className="flex flex-col flex-grow backdrop-blur-sm bg-white/70 dark:bg-black/70 text-black dark:text-white min-h-screen">
         <Navbar />
         

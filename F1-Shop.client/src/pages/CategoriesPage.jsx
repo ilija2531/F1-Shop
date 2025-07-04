@@ -1,6 +1,7 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import FadeIn from "../components/FadeIn";
 
 const categories = [
   {
@@ -39,6 +40,7 @@ const CategoriesPage = () => {
 
   return (
     <div className="min-h-screen px-6 py-10">
+      <FadeIn className="mb-10" delay={0.2} duration={0.8}>
       <h1 className="text-3xl font-bold mb-6 text-center">Категории на производи</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {categories.map((cat) => (
@@ -52,6 +54,7 @@ const CategoriesPage = () => {
           </div>
         ))}
       </div>
+      </FadeIn>
     </div>
   );
 };

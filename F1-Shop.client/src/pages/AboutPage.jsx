@@ -1,8 +1,10 @@
 import React from "react";
+import FadeIn from "../components/FadeIn";
 
 const AboutPage = () => {
   return (
     <div className="max-w-4xl mx-auto p-6">
+      <FadeIn className="mb-10" delay={0.2} duration={0.8}>
       <h1 className="text-3xl font-bold mb-4">За Нас</h1>
       <p className="mb-4">
         Добредојдовте во F1 Shop – онлајн дестинација за сите вистински љубители на Формула 1! 
@@ -26,6 +28,7 @@ const AboutPage = () => {
       <p className="font-semibold">
         Се гледаме на патеката! 🏁
       </p>
+      </FadeIn>
     </div>
   );
 };

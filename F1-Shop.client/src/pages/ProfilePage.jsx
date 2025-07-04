@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import FadeIn from "../components/FadeIn";
 
 
 const ProfilePage = () => {
@@ -54,6 +55,7 @@ const ProfilePage = () => {
 
   return (
    <div className="flex justify-center items-center min-h-screen px-4">
+      <FadeIn className="w-full max-w-md" delay={0.2} duration={0.8}>
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-center">👤 Мој профил</CardTitle>
@@ -108,6 +110,7 @@ const ProfilePage = () => {
           </form>
         </CardContent>
       </Card>
+      </FadeIn>
     </div>
     
   );

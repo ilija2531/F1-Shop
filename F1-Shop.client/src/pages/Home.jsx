@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ProductList from "../components/ProductList";
 import { getProducts } from "../api/products";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import FadeIn from "../components/FadeIn";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -40,6 +41,7 @@ const Home = () => {
 
   return (
     <div className="space-y-8">
+      <FadeIn className="mb-8" delay={0.2} duration={0.8}>
       <div className="text-center py-4">
         <h1 className="text-3xl font-bold">🏁 Добредојде во F1 Shop!</h1>
         <p className="text-muted-foreground">
@@ -86,6 +88,7 @@ const Home = () => {
           </button>
         </div>
       </section>
+      </FadeIn>      
     </div>
   );
 };

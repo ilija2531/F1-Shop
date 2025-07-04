@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
   team: { type: String },
   driver: { type: String },
   price: { type: Number, required: true },
-  image: { type: String },
+  images: [{ type: String }],
   description: { type: String },
   inStock: { type: Boolean, default: true },
 }, { timestamps: true });

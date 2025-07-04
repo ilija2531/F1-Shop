@@ -95,6 +95,9 @@ const Navbar = () => {
                   <DropdownMenuItem asChild>
                     <Link to="/admin/users">Корисници</Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/admin/top-products">Најпродавани производи</Link>
+                  </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={logout}>Одјави се</DropdownMenuItem>
                 </>

@@ -10,6 +10,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import FadeIn from "../components/FadeIn";
 
 const AdminUsers = () => {
   const { user } = useAuth();
@@ -34,6 +35,7 @@ const AdminUsers = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
+      <FadeIn className="mb-6" delay={0.2} duration={0.8}>
       <Card>
         <CardHeader>
           <CardTitle>👥 Регистрирани корисници</CardTitle>
@@ -71,6 +73,7 @@ const AdminUsers = () => {
           </ScrollArea>
         </CardContent>
       </Card>
+      </FadeIn>
     </div>
   );
 };

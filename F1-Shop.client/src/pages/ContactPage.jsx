@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { sendContactEmail } from "../../utils/sendContactEmail.js";
+import FadeIn from "../components/FadeIn.jsx";
 
 const ContactPage = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -29,6 +30,7 @@ const ContactPage = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-6">
+      <FadeIn className="mb-6" delay={0.2} duration={0.8}>
       <h1 className="text-3xl font-bold mb-6">Контакт</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input
@@ -58,6 +60,7 @@ const ContactPage = () => {
           {loading ? "Се испраќа..." : "Испрати"}
         </Button>
       </form>
+      </FadeIn>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import FadeIn from "../components/FadeIn";
 
 const RegisterPage = () => {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
@@ -32,6 +33,7 @@ const RegisterPage = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
+      <FadeIn className="w-full max-w-md" delay={0.2} duration={0.8}>
       <Card className="w-full max-w-md p-4">
         <CardHeader>
           <CardTitle className="text-center">📝 Регистрација</CardTitle>
@@ -78,6 +80,7 @@ const RegisterPage = () => {
           </form>
         </CardContent>
       </Card>
+      </FadeIn>
     </div>
   );
 };

@@ -20,7 +20,7 @@ import CategoriesPage from "./pages/CategoriesPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import SuccessPage from "./pages/SuccessPage";
-
+import AdminTopProducts from "./pages/AdminTopProducts";
 
 const App = () => {
   return (
@@ -48,6 +48,7 @@ const App = () => {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/success" element={<SuccessPage />} />
+          <Route path="/admin/top-products" element={<AdminTopProducts />} />
           
          
          

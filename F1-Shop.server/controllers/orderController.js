@@ -91,3 +91,45 @@ exports.statusUpdateOrder = async (req, res) => {const { status } = req.body;
     res.status(500).json({ message: "Внатрешна грешка." });
   }
 };
+
+
+exports.getTopOrderedProducts = async (req, res) => {
+  try {
+    const orders = await Order.aggregate([
+      { $unwind: "$items" },
+      {
+        $group: {
+          _id: "$items.product",
+          totalSold: { $sum: "$items.quantity" },
+        },
+      },
+      {
+        $lookup: {
+          from: "products",
+          localField: "_id",
+          foreignField: "_id",
+          as: "productInfo",
+        },
+      },
+      { $unwind: "$productInfo" },
+      {
+        $project: {
+          _id: 0,
+          productId: "$productInfo._id",
+          name: "$productInfo.name",
+          totalSold: 1,
+          price: "$productInfo.price",
+          image: "$productInfo.image",
+        },
+      },
+      { $sort: { totalSold: -1 } },
+      { $limit: 10 },
+    ]);
+
+    res.json(orders);
+  } catch (err) {
+    console.error("Грешка при анализа на најкупувани производи:", err);
+    res.status(500).json({ error: "Грешка при извлекување на податоци." });
+  }
+};
+

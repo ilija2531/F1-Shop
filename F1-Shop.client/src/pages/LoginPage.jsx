@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import FadeIn from "../components/FadeIn";
 
 const LoginPage = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -34,6 +35,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
+      <FadeIn className="w-full max-w-md" delay={0.2} duration={0.8}>
       <Card className="w-full max-w-md p-6 backdrop-blur-sm bg-white/80 dark:bg-black/80 shadow-xl">
         <CardHeader>
           <CardTitle className="text-center">🔐 Најава</CardTitle>
@@ -68,6 +70,7 @@ const LoginPage = () => {
           </form>
         </CardContent>
       </Card>
+      </FadeIn>
     </div>
   );
 };

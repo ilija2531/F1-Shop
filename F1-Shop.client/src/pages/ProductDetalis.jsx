@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import FadeIn from "../components/FadeIn";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -48,6 +49,8 @@ const ProductDetails = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
+      <FadeIn className="mb-6" delay={0.2} duration={0.8}>
+        <Separator />
       <Card>
         <CardHeader>
           <CardTitle>{product.name}</CardTitle>
@@ -63,7 +66,7 @@ const ProductDetails = () => {
             className="mx-auto rounded-md shadow w-full max-w-sm"
           />
 
-          <p>{product.description}</p>
+          <p className="whitespace-pre-line text-gray-700">{product.description}</p>
           <p>
             <strong>Цена:</strong> {product.price} ден
           </p>
@@ -93,6 +96,7 @@ const ProductDetails = () => {
           </div>
         </CardContent>
       </Card>
+      </FadeIn>
     </div>
   );
 };

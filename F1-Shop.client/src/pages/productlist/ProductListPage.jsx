@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { getProducts } from "../../api/products";
 import ProductList from "../../components/ProductList";
 import "./ProductListPage.css";
+import FadeIn from "../../components/FadeIn";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -52,9 +53,10 @@ const ProductListPage = () => {
 
   return (
     <div className="product-list-page">
+      <FadeIn className="fade-in" delay={0.2} duration={0.8}>
       <h2>🛒 F1 Производи</h2>
 
-      {/* Search */}
+      
       <div style={{ marginBottom: "1rem" }}>
         <input
           type="text"
@@ -65,7 +67,7 @@ const ProductListPage = () => {
         />
       </div>
 
-      {/* Filters */}
+      
       <div style={{ marginBottom: "1rem" }}>
         <label>Филтрирај по тим: </label>
         <select value={selectedTeam} onChange={(e) => setSelectedTeam(e.target.value)}>
@@ -126,6 +128,7 @@ const ProductListPage = () => {
           </button>
         ))}
       </div>
+      </FadeIn>
     </div>
   );
 };

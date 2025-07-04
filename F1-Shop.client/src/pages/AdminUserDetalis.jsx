@@ -8,6 +8,7 @@ import {
   CardTitle,
   CardContent
 } from "@/components/ui/card";
+import FadeIn from "../components/FadeIn";
 
 const AdminUserDetails = () => {
   const { id } = useParams();
@@ -32,6 +33,7 @@ const AdminUserDetails = () => {
 
   return (
     <div className="max-w-xl mx-auto p-6">
+      <FadeIn className="mb-6" delay={0.2} duration={0.8}>
       <Card>
         <CardHeader>
           <CardTitle>👤 Детали за корисник</CardTitle>
@@ -43,6 +45,7 @@ const AdminUserDetails = () => {
           <p><strong>Регистриран на:</strong> {new Date(userInfo.createdAt).toLocaleString()}</p>
         </CardContent>
       </Card>
+      </FadeIn>
     </div>
   );
 };
